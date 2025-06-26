@@ -66,9 +66,11 @@
       }
 
       <div class="flex justify-center items-center w-full mt-6">
-        <p-button icon="pi pi-sign-in" label="Sign in" severity="primary" size="small" [disabled]="formGroup.invalid"
+        <p-button icon="pi pi-sign-in" label="Sign in" severity="primary" size="small" [disabled]="formGroup.invalid" [loading]="loading"
           (click)="register()" />
       </div>
     </div>
   </div>
 </div>
+
+<p-toast />
