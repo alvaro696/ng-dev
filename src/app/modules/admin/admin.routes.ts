@@ -1,6 +1,8 @@
 import { Routes } from "@angular/router";
-import { Dashboard } from "./dashboard/dashboard";
-import { User } from "./user/user";
+import { Dashboard } from "./pages/dashboard/dashboard";
+import { User } from "./pages/user/user";
+import { Profile } from "./pages/profile/profile";
+
 export default [
   {
     path: '',
@@ -9,5 +11,9 @@ export default [
   {
     path: 'user',
     component: User,
+  },
+  {
+    path: 'profile',
+    component: Profile,
   },
 ] as Routes;
