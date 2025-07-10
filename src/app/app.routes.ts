@@ -3,6 +3,8 @@ import { Landing } from './modules/landing/landing';
 import { NotFound } from './common/pages/not-found/not-found';
 import { Unauthorized } from './common/pages/unauthorized/unauthorized';
 import { Admin } from './modules/admin/admin';
+import { authGuard } from './common/guards/auth-guard';
+import { alreadyAuthGuard } from './common/guards/already-auth-guard';
 
 export const routes: Routes = [
   {
@@ -11,24 +13,27 @@ export const routes: Routes = [
     loadChildren: () => import('./modules/landing/landing.routes')
   },
   {
+    path: 'auth',
+    canActivate: [alreadyAuthGuard],
+    loadChildren: () => import('./modules/auth/auth.routes')
+  },
+  {
     path: 'admin',
+    canActivate: [authGuard],
     component: Admin,
     loadChildren: () => import('./modules/admin/admin.routes')
   },
   {
-    path: 'auth',
-    loadChildren: () => import('./modules/auth/auth.routes')
-  },
-  {
     path: 'not-found',
-    component: NotFound, // Componente para manejar rutas no encontradas
+    component: NotFound
   },
   {
     path: 'unauthorized',
-    component: Unauthorized, // Componente para manejar accesos no autorizados
+    component: Unauthorized
   },
   {
-    path: '**', // para controlar las rutas no encontradas
-    redirectTo: 'not-found',
+    path: '**',
+    /* component: NotFound */
+    redirectTo: 'not-found'
   }
 ];

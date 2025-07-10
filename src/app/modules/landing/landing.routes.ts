@@ -1,19 +1,22 @@
 import { Routes } from "@angular/router";
 import { Home } from "./pages/home/home";
-import { Contact } from "./pages/contact/contact";
-import { About } from "./pages/about/about";
+import { Blog } from "./pages/blog/blog";
+import { Price } from "./pages/price/price";
 
 export default [
   {
     path: '',
-    component: Home,
+    title: 'Northwind',
+    component: Home
   },
   {
-    path: 'contact',
-    component: Contact,
+    path: 'blog',
+    title: 'Blog',
+    component: Blog
   },
   {
-    path: 'about',
-    component: About,
-  },
+    path: 'price',
+    title: 'Price',
+    component: Price
+  }
 ] as Routes;

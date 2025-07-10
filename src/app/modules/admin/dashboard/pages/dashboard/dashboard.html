@@ -1,0 +1,14 @@
+<div class="min-h-screen bg-gray-50">
+  <app-header pageName="Dashboard"></app-header>
+
+  <!-- Main content -->
+  <div class="p-4 lg:p-6">
+    <p>Fecha actual: {{ currentDate }}</p>
+    <p>Fecha actual: {{ currentDate | date:'dd/MM/yy' }}</p>
+    <p>Fecha actual relativa: {{ currentDate | date:'EEEE, d MMMM, y, h:mm a':'-0400':'es-BO' }}</p>
+    <p>Hora actual: {{ currentDate | date:'h:mm a' }}</p>
+    <p>Precio mensual: {{ priceMonthly | currency:'BOB':'symbol-narrow':'1.2-2':'es-BO' }}</p>
+    <p>Sueldo: {{ salary | number:'1.2-2':'es-BO' }}</p>
+    <p>Número de teléfono: {{ (authService.accessUser?.phone || '') | phoneNumber:'+(xxx) xxxxxxxx' }}</p>
+  </div>
+</div>

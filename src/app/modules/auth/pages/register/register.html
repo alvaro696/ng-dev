@@ -2,71 +2,107 @@
   <div class="p-7 shadow-lg rounded-lg w-full lg:w-4/12 mx-auto bg-white">
     <div class="text-center mb-5">
       <img src="icons/hyper.svg" alt="Image" height="50" class="mb-3 mx-auto">
-      <div class="text-gray-900 text-3xl font-medium mb-3">Sign up</div>
-      <span class="text-gray-600 font-medium">You have an account?</span>
-      <a class="font-medium text-blue-500 hover:underline ml-2 cursor-pointer" routerLink="/auth/login">Go login</a>
+      <div class="text-gray-900 text-2xl font-medium mb-3">Sign up</div>
+      <!-- condición ? por verdad : por falso -->
+      <!-- <a [href]="homepage" [class]="isActive === true ? 'text-green-500' : 'text-red-500'">go to homepage</a><br> -->
+      <span class="text-gray-600 font-medium text-sm">You have an account?</span>
+      <a class="font-medium text-blue-500 hover:underline ml-2 cursor-pointer text-sm" routerLink="/auth/login">Go login</a>
     </div>
 
     <div [formGroup]="formGroup">
-      <label for="fullName" class="block text-gray-900 font-medium mb-2">Full name</label>
-      <input id="fullName" type="text" placeholder="Your full name"
-        class="w-full mb-3 border rounded-md px-3 py-2 focus:outline-none focus:ring-2" pInputText pSize="small"
+      <label for="fullName" class="block text-gray-900 font-medium mb-2 text-sm">Full name</label>
+      <input id="fullName"
+        type="text"
+        placeholder="Your full name"
+        class="w-full mb-3 border rounded-md px-3 py-2 focus:outline-none focus:ring-2"
+        pInputText
+        pSize="small"
         formControlName="fullName">
+
       @if (formGroup.controls.fullName.touched && formGroup.controls.fullName.hasError('required')) {
-      <small class="text-red-500 block mb-5">This field is required</small>
+        <small class="text-red-500 block mb-5 text-xs">This field is required</small>
       }
+
       @if (formGroup.controls.fullName.hasError('minlength')) {
-      <small class="text-red-500 block mb-5">min 3 characters</small>
+        <small class="text-red-500 block mb-5 text-xs">min 3 characters</small>
       }
+
       @if (formGroup.controls.fullName.hasError('maxlength')) {
-      <small class="text-red-500 block mb-5">max 100 characters</small>
+        <small class="text-red-500 block mb-5 text-xs">max 80 characters</small>
       }
 
-      <label for="email1" class="block text-gray-900 font-medium mb-2">Email</label>
-      <input id="email1" type="text" placeholder="Email address"
-        class="w-full mb-3 border rounded-md px-3 py-2 focus:outline-none focus:ring-2" pInputText pSize="small"
+      <label for="email1" class="block text-gray-900 font-medium mb-2 text-sm">Email</label>
+      <input id="email1"
+        type="text"
+        placeholder="Email address"
+        class="w-full mb-3 border rounded-md px-3 py-2 focus:outline-none focus:ring-2"
+        pInputText
+        pSize="small"
         formControlName="email">
+
       @if (formGroup.controls.email.touched && formGroup.controls.email.hasError('required')) {
-      <small class="text-red-500 block mb-5">This field is required</small>
+        <small class="text-red-500 block mb-5 text-xs">The field is required</small>
       }
+
       @if (formGroup.controls.email.hasError('pattern')) {
-      <small class="text-red-500 block mb-5">Email format invalid</small>
+        <small class="text-red-500 block mb-5 text-xs">Email format invalid</small>
       }
 
-      <label for="password1" class="block text-gray-900 font-medium mb-2">Password</label>
-      <input id="password1" type="password" placeholder="Password"
-        class="w-full mb-3 border rounded-md px-3 py-2 focus:outline-none focus:ring-2" pInputText pSize="small"
+      <label for="password1" class="block text-gray-900 font-medium mb-2 text-sm">Password</label>
+      <input id="password1"
+        type="password"
+        placeholder="Password"
+        class="w-full mb-3 border rounded-md px-3 py-2 focus:outline-none focus:ring-2"
+        pInputText
+        pSize="small"
         formControlName="password">
+
       @if (formGroup.controls.password.touched && formGroup.controls.password.hasError('required')) {
-      <small class="text-red-500 block mb-5">This field is required</small>
-      }
-      @if (formGroup.controls.password.hasError('pattern')) {
-      <small class="text-red-500 block mb-5">Password format invalid</small>
+        <small class="text-red-500 block mb-5 text-xs">The field is required</small>
       }
 
-      <label for="mobileNumber" class="block text-gray-900 font-medium mb-2">Mobile number</label>
-      <input id="mobileNumber" type="text" placeholder="Your mobile number"
-        class="w-full mb-3 border rounded-md px-3 py-2 focus:outline-none focus:ring-2" pInputText pSize="small"
-        formControlName="phone">
-      @if (formGroup.controls.phone.touched && formGroup.controls.phone.hasError('required')) {
-      <small class="text-red-500 block mb-5">This field is required</small>
+      @if (formGroup.controls.password.hasError('pattern')) {
+        <small class="text-red-500 block mb-5 text-xs">Password have at least 8 characters, one uppercase, one lowercase, one number and one special case character (!#$%^&*&#x40;)</small>
       }
+
+      <label for="mobileNumber" class="block text-gray-900 font-medium mb-2 text-sm">Mobile number</label>
+      <input id="mobileNumber"
+        type="text"
+        placeholder="Your mobile number"
+        class="w-full mb-3 border rounded-md px-3 py-2 focus:outline-none focus:ring-2"
+        pInputText
+        pSize="small"
+        formControlName="phone">
+
+      @if (formGroup.controls.phone.touched && formGroup.controls.phone.hasError('required')) {
+        <small class="text-red-500 block mb-5 text-xs">The field is required</small>
+      }
+
       @if (formGroup.controls.phone.hasError('invalidPhone')) {
-      <small class="text-red-500 block mb-5">Mobile phone number invalid</small>
+        <small class="text-red-500 block mb-5 text-xs">The phone number is invalid</small>
       }
 
       <div class="flex items-center justify-between">
         <div class="flex items-center">
-          <p-checkbox inputId="rememberme1" class="mr-2" [binary]="true" formControlName="terms" />
-          <label for="rememberme1" class="text-gray-900">Accept terms and conditions</label>
+          <p-checkbox
+            class="mr-2"
+            inputId="rememberme1"
+            [binary]="true"
+            formControlName="terms" />
+          <label for="rememberme1" class="text-gray-900 text-sm">Accept terms and conditions</label>
         </div>
       </div>
+
       @if (formGroup.controls.terms.touched && formGroup.controls.terms.hasError('required')) {
-      <small class="text-red-500 block mb-5">You must accept terms and conditions</small>
+        <small class="text-red-500 block mt-3 text-xs">The field is required</small>
       }
 
       <div class="flex justify-center items-center w-full mt-6">
-        <p-button icon="pi pi-sign-in" label="Sign in" severity="primary" size="small" [disabled]="formGroup.invalid" [loading]="loading"
+        <p-button label="Sign up"
+          icon="pi pi-user"
+          size="small"
+          [disabled]="formGroup.invalid"
+          [loading]="loading"
           (click)="register()" />
       </div>
     </div>

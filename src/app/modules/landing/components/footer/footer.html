@@ -1,1 +1,57 @@
-<p>footer works!</p>
+<footer class="container mx-auto px-4 py-12 border-t border-gray-800">
+  <div class="flex flex-col md:flex-row items-start">
+    <!-- Logo and Copyright -->
+    <div class="mb-8 md:mb-0 md:w-1/4">
+      <div class="flex items-center mb-2">
+        <div class="h-6 w-6 bg-red-500 flex items-center justify-center rounded-sm mr-2">
+          <span class="font-bold text-white text-xs">N</span>
+        </div>
+        <span class="font-bold text-white">Northwind</span>
+      </div>
+      <p class="text-gray-500 text-sm">Copyright © {{ currentYear }}. All rights reserved.</p>
+
+      <!-- Newsletter -->
+      <div class="mt-6 flex">
+        <input
+          [(ngModel)]="email"
+          type="email"
+          placeholder="Enter your email"
+          class="bg-gray-800 text-white px-4 py-2 rounded-l-md w-full focus:outline-none"
+        />
+        <button (click)="handleSubscribe()" class="text-white px-4 py-2 rounded-r-md gradient-primary">
+          Subscribe
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="grid grid-cols-3 gap-8 w-full md:w-3/4 ml-12">
+      <!-- Terms Column -->
+      <div>
+        <h4 class="font-medium mb-4">Terms</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Support Column -->
+      <div>
+        <h4 class="font-medium mb-4">Supports</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm">Feedback</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm">Docs</a></li>
+        </ul>
+      </div>
+
+      <!-- Engage Column -->
+      <div>
+        <h4 class="font-medium mb-4">Engage</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm">Discord</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm">Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

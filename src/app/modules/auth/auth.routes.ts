@@ -1,14 +1,20 @@
 import { Routes } from "@angular/router";
-import { Login } from "./pages/login/login";
-import Register from "./pages/register/register";
+import { Register } from "./pages/register/register";
 
 export default [
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login').then(m => m.Login),
+    title: 'Login',
+    loadComponent: () => import('./pages/login/login').then(m => m.Login)
+  },
+  {
+    path: 'login-two',
+    title: 'Login two',
+    loadComponent: () => import('./pages/login-two/login-two').then(m => m.LoginTwo)
   },
   {
     path: 'register',
-    component: Register,
+    title: 'Register',
+    component: Register
   }
 ] as Routes;

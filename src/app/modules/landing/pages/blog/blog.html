@@ -1,0 +1,67 @@
+<div class="min-h-screen bg-black dark:bg-white text-white dark:text-black pt-24">
+  <!-- Blog Header -->
+  <section class="container mx-auto px-4 text-center py-16">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Blog</h1>
+    <p class="text-gray-400 text-lg mb-16">Ideas, insights, and everything we're building at Northwind.</p>
+
+    <!-- Featured Article -->
+    <div class="max-w-4xl mx-auto mb-24">
+      <div class="relative rounded-lg overflow-hidden mb-6">
+        <div class="bg-gradient-to-r from-blue-400 via-purple-400 to-orange-400 h-64 md:h-96 flex items-center justify-center">
+          <h2 class="text-3xl md:text-5xl font-bold text-white">Inside Northwind</h2>
+        </div>
+      </div>
+      <div class="text-left">
+        <h3 class="text-2xl font-bold mb-4">Northwind version 1.0.1: Smarter Architecture, Tools, and Memory</h3>
+        <div class="flex items-center text-gray-400 text-sm mb-4">
+          <span>Jinyu Tang</span>
+          <span class="mx-2">•</span>
+          <span>June 16, 2025</span>
+        </div>
+        <p class="text-gray-400">
+          Northwind version 1.0.1 featured a re engineered architecture, unified agent models, smarter tool orchestration, and long-term memory that brings us closer to building the real AI engineer.
+        </p>
+      </div>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+      <article *ngFor="let article of articles" class="group cursor-pointer">
+        <div class="relative rounded-lg overflow-hidden mb-4">
+          <div [ngClass]="article.gradient" class="h-48 flex items-center justify-center">
+            <h3 class="text-xl font-bold text-white text-center px-4">{{ article.imageTitle }}</h3>
+          </div>
+        </div>
+        <div class="text-left">
+          <h4 class="text-lg font-semibold mb-2 group-hover:text-red-400 transition-colors">{{ article.title }}</h4>
+          <div class="flex items-center text-gray-400 text-sm mb-3">
+            <span>{{ article.author }}</span>
+            <span class="mx-2">•</span>
+            <span>{{ article.date }}</span>
+          </div>
+          <p class="text-gray-400 text-sm">{{ article.excerpt }}</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- Second Row of Articles -->
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <article *ngFor="let article of secondRowArticles" class="group cursor-pointer">
+        <div class="relative rounded-lg overflow-hidden mb-4">
+          <div [ngClass]="article.gradient" class="h-48 flex items-center justify-center">
+            <h3 class="text-xl font-bold text-white text-center px-4">{{ article.imageTitle }}</h3>
+          </div>
+        </div>
+        <div class="text-left">
+          <h4 class="text-lg font-semibold mb-2 group-hover:text-red-400 transition-colors">{{ article.title }}</h4>
+          <div class="flex items-center text-gray-400 text-sm mb-3">
+            <span>{{ article.author }}</span>
+            <span class="mx-2">•</span>
+            <span>{{ article.date }}</span>
+          </div>
+          <p class="text-gray-400 text-sm">{{ article.excerpt }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>

@@ -1,13 +1,109 @@
-<nav>
-  <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link" routerLink='/admin'>Dashboard</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink='user'>Users</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink='profile'>Profile</a>
-    </li>
-  </ul>
-</nav>
+<!-- Mobile Overlay -->
+<div
+  *ngIf="sidebarService.isMobile() && sidebarService.isOpen()"
+  class="fixed inset-0 bg-black opacity-75 z-40 lg:hidden"
+  (click)="sidebarService.close()"
+></div>
+
+<!-- Sidebar -->
+<aside
+  class="fixed top-0 left-0 z-50 h-full w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out overflow-hidden lg:relative lg:z-30 lg:translate-x-0"
+  [class.translate-x-0]="sidebarService.isOpen()"
+  [class.-translate-x-full]="!sidebarService.isOpen() && sidebarService.isMobile()"
+  [class.lg:block]="sidebarService.isOpen() && !sidebarService.isMobile()"
+  [class.lg:hidden]="!sidebarService.isOpen() && !sidebarService.isMobile()"
+>
+  <div class="flex flex-col h-full">
+    <!-- Header -->
+    <div
+      class="flex items-center justify-between h-16 px-4 border-b border-gray-200 flex-shrink-0"
+    >
+      <div class="flex items-center space-x-3">
+        <div
+          class="w-6 h-6 bg-black rounded-full flex items-center justify-center"
+        >
+          <span class="text-white text-xs font-bold">N</span>
+        </div>
+        <span class="text-base font-medium text-gray-900">Northwind</span>
+      </div>
+    </div>
+
+    <!-- Scrollable Content -->
+    <div class="flex-1 overflow-y-auto">
+      <!-- Documents Section -->
+      <div class="px-4 pt-6">
+        <h3
+          class="px-3 text-xs font-medium text-gray-500 uppercase tracking-wider mb-2"
+        >
+          Options
+        </h3>
+        <div class="space-y-1">
+          @for (item of documentItems; track $index) {
+            <div class="space-y-1">
+              <a [routerLink]="item.route"
+                routerLinkActive="bg-primary-200 text-gray-100 hover:bg-primary-200"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="flex items-center justify-between px-3 py-2.5 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors group"
+              >
+                <div class="flex items-center">
+                  <span class="text-gray-500 group-hover:text-gray-700 mr-3"
+                    [class]="item.icon">
+                  </span>
+                  {{ item.label }}
+                </div>
+              </a>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="border-t border-gray-200 p-4 flex-shrink-0">
+      <!-- User Profile Section -->
+      <div class="relative">
+        <div
+          class="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg cursor-pointer transition-colors"
+          (click)="toggleUserMenu()"
+        >
+          <div
+            class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0"
+          >
+            <span class="text-white text-sm font-medium">{{ authService.accessUser?.fullName?.charAt(0) | uppercase }}</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate">{{ authService.accessUser?.fullName }}</p>
+            <p class="text-xs text-gray-500 truncate">{{ authService.accessUser?.email }}</p>
+          </div>
+          <button class="p-1 hover:bg-gray-200 rounded transition-colors">
+            <svg
+              class="w-4 h-4 text-gray-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- User Menu Dropdown -->
+        <div
+          *ngIf="showUserMenu"
+          class="absolute bottom-full left-0 right-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-50"
+        >
+          <button
+            *ngFor="let item of userMenuItems"
+            (click)="item.action && item.action(); showUserMenu = false"
+            class="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+          >
+            <span [class]="item.icon"></span> &nbsp; {{ item.label }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<p-confirmdialog />

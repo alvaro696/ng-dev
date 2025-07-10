@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   imports: [],
   template: `
     <p>
-      401 - Unauthorized!
+      401 - Unauthorized
     </p>
   `,
   styles: ``

@@ -1,0 +1,220 @@
+<app-header pageName="Tasks"></app-header>
+
+<div class="p-6 bg-white">
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900 mb-2">
+      Product management
+    </h1>
+    <p class="text-gray-600">Here's a list of your products.</p>
+  </div>
+
+  <!-- Filters -->
+  <div class="flex flex-col sm:flex-row gap-4 mb-6">
+    <div class="flex-1">
+      <input
+        type="text"
+        placeholder="Filter product..."
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearchTermChange($event)"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2"
+      />
+    </div>
+
+    <div class="flex gap-2">
+      <button
+        (click)="modalAdd = true"
+        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-offset-2"
+      >
+        Add product
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if (loading) {
+    <div class="flex justify-center items-center py-8">
+      <div
+        class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"
+      ></div>
+    </div>
+  }
+
+  @if (!loading) {
+    <!-- Table -->
+    <div class="bg-white shadow overflow-y-hidden sm:rounded-md">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              id
+            </th>
+
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              <button class="group inline-flex items-center">Nombre</button>
+            </th>
+
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              <button class="group inline-flex items-center">Categoría</button>
+            </th>
+
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              <button class="group inline-flex items-center">Cantidad por unidad</button>
+            </th>
+
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              <button class="group inline-flex items-center">Precio unitario</button>
+            </th>
+
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              <button class="group inline-flex items-center">Unidades en stock</button>
+            </th>
+
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              <button class="group inline-flex items-center">Producto descontinuado</button>
+            </th>
+
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              <button class="group inline-flex items-center">Acciones</button>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody class="bg-white divide-y divide-gray-200">
+          @for (item of paginatedProducts?.data; track $index) {
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                {{ item.id }}
+              </td>
+
+              <td class="px-6 py-4 text-sm text-gray-900">
+                <div class="flex items-center">
+                  <span class="truncate max-w-md">{{ item.name }}</span>
+                </div>
+              </td>
+
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-900">{{ item.categoryProduct.name }}</span>
+                </div>
+              </td>
+
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-900">{{ item.quantityPerUnit }}</span>
+                </div>
+              </td>
+
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-900">
+                    {{ item.unitPrice | currency:'BOB':'symbol-narrow':'1.2-2':'es-BO' }}
+                  </span>
+                </div>
+              </td>
+
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-900">{{ item.unitsInStock }} units</span>
+                </div>
+              </td>
+
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-900">
+                    <p-tag
+                      [value]="item.discontinued ? 'Yes' : 'No'"
+                      [severity]="item.discontinued ? 'danger' : 'info'" />
+                  </span>
+                </div>
+              </td>
+
+              <td
+                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+              >
+                <div class="relative inline-block text-left">
+                  <button
+                    (click)="toggleDropdown(item.id)"
+                    class="inline-flex items-center p-2 text-gray-400 hover:text-gray-600 focus:outline-none rounded-full focus:bg-gray-300"
+                  >
+                    <span class="pi pi-ellipsis-v"></span>
+                  </button>
+
+                  @if (openDropdown === item.id) {
+                    <div
+                      class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-opacity-5 focus:outline-none z-10"
+                    >
+                      <div class="py-1">
+                        @for (option of menuOptions; track $index) {
+                          <button
+                            (click)="handleMenuAction(option, item)"
+                            [class]="'block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 '"
+                          >
+                            {{ option.label }}
+                          </button>
+                        }
+                      </div>
+                    </div>
+                  }
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    @if (!loading && paginatedProducts) {
+      <app-pagination
+        [currentPage]="paginatedProducts.currentPage"
+        [lastPage]="paginatedProducts.lastPage"
+        [totalCount]="paginatedProducts.totalCount"
+        [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)"
+        (pageSizeChange)="onPageSizeChange($event)">
+      </app-pagination>
+    }
+  }
+
+</div>
+
+<app-create-product
+  [visible]="modalAdd"
+  (visibleChange)="modalAdd = false">
+</app-create-product>
+
+<app-edit-product
+  [visible]="modalEdit"
+  [product]="productSelected"
+  (visibleChange)="modalEdit = false">
+</app-edit-product>
+
+<p-confirmdialog />
+
+<p-toast />

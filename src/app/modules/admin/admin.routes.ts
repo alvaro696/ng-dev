@@ -1,19 +1,16 @@
 import { Routes } from "@angular/router";
-import { Dashboard } from "./pages/dashboard/dashboard";
-import { User } from "./pages/user/user";
-import { Profile } from "./pages/profile/profile";
 
 export default [
   {
     path: '',
-    component: Dashboard,
+    loadComponent: () => import("./dashboard/pages/dashboard/dashboard").then(m => m.Dashboard)
   },
   {
-    path: 'user',
-    component: User,
+    path: 'users',
+    loadComponent: () => import("./user/pages/list-user/list-user").then(m => m.ListUser)
   },
   {
-    path: 'profile',
-    component: Profile,
-  },
+    path: 'products',
+    loadComponent: () => import("./product/pages/product/product").then(m => m.ProductComponent)
+  }
 ] as Routes;

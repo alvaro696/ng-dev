@@ -1,3 +1,3 @@
 export const environment = {
-   apiUrl: 'https://focused-contentment-production.x.railway.app'
+  apiUrl: 'https://focused-contentment-x.up.railway.app'
 };

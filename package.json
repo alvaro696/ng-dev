@@ -1,13 +1,20 @@
 {
   "name": "ng-dev",
   "version": "0.0.0",
+  "description": "Este proyecto es para el curso de Angular",
+  "author": {
+    "name": "MyName",
+    "url": "https://github.com/URL_ADDRESS"
+  },
+  "license": "UNLICENSED",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "start-dev": "ng serve --configuration development"
+    "start:testing": "ng serve --configuration testing",
+    "build:testing": "ng build --configuration testing"
   },
   "private": true,
   "dependencies": {
@@ -30,8 +37,8 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.0.3",
-    "@angular/cli": "^20.0.3",
+    "@angular/build": "^20.0.1",
+    "@angular/cli": "^20.0.1",
     "@angular/compiler-cli": "^20.0.0",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.7.0",

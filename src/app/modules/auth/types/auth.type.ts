@@ -4,8 +4,3 @@ export type RegisterUser = {
   password: string;
   phone: string;
 }
-
-export type LoginUser = {
-  credential: string;
-  password: string;
-}
